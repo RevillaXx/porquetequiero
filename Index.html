@@ -16,8 +16,9 @@
         }
 
         .titulo-grande {
-            font-size: 5rem; 
-            margin-bottom: 30px;
+            font-size: 4rem; 
+            margin-top: 50px; /* Espacio extra arriba */
+            margin-bottom: 40px; /* Más espacio debajo del título */
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -48,17 +49,18 @@
             display: flex; justify-content: center;
             width: 460px;
             gap: 60px;
-            margin-bottom: 40px;
+            margin-bottom: 50px; /* Más espacio debajo de las etiquetas */
         }
 
         .contenedor-botones {
             display: flex;
-            gap: 40px;
-            margin-top: 20px;
+            gap: 50px;
+            margin-top: 50px; /* Botones más abajo */
+            padding-bottom: 50px; /* Espacio extra al final */
         }
 
         .btn-img {
-            width: 130px; /* Tamaño grande */
+            width: 130px; 
             cursor: pointer; 
             transition: transform 0.3s;
         }
@@ -66,10 +68,11 @@
 
         /* Adaptación para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.5rem !important; margin-bottom: 15px; }
-            .clock-labels { width: 100% !important; gap: 10px !important; }
-            .your-clock { transform: scale(0.6); margin-bottom: -30px; }
-            .btn-img { width: 100px !important; } /* Tamaño grande en móvil */
+            .titulo-grande { font-size: 2.2rem !important; margin-top: 20px; margin-bottom: 25px; }
+            .clock-labels { width: 100% !important; gap: 10px !important; margin-bottom: 30px; }
+            .your-clock { transform: scale(0.55); margin-bottom: -40px; }
+            .contenedor-botones { margin-top: 40px; gap: 30px; }
+            .btn-img { width: 90px !important; } 
         }
     </style>
 </head>
