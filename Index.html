@@ -8,16 +8,24 @@
     
     <style>
         body { 
-            margin: 0; height: 100vh; 
-            display: flex; flex-direction: column; 
-            align-items: center; justify-content: center;
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            /* 3. Justificado para empujar botones abajo y título arriba */
+            justify-content: space-between; 
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
+            padding: 20px 0; /* Padding para márgenes superior e inferior */
+            box-sizing: border-box;
         }
 
+        /* 2. Margen superior de 20px aplicado aquí */
         .titulo-grande {
             font-size: 5rem; 
-            margin-bottom: 20px; /* Ajustado para subir */
+            margin-top: 20px; 
+            margin-bottom: 0;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -39,37 +47,28 @@
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
         }
 
+        /* 1. Separación de 10px cada dos dígitos del contador */
         .your-clock { 
-            display: flex; justify-content: center; 
+            display: flex; 
+            justify-content: center; 
             margin-bottom: 5px; 
         }
-
-        /* Separación entre grupos de números del reloj (Días, Horas, Minutos) */
-        .flip-clock-wrapper ul:nth-child(2),
-        .flip-clock-wrapper ul:nth-child(4),
-        .flip-clock-wrapper ul:nth-child(6) {
-            margin-right: 30px !important; 
+        .flip-clock-wrapper ul {
+            margin: 0 5px !important; /* Ajuste fino de la separación */
         }
 
         .clock-labels {
             display: flex; justify-content: center;
             width: 460px;
             gap: 60px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
-        .texto-te-quiero {
-            font-family: 'Comic Sans MS', cursive;
-            font-size: 3rem;
-            color: white;
-            margin: 20px 0;
-            text-shadow: 2px 2px 4px #000;
-        }
-
+        /* 3. Margen inferior de 20px para los botones */
         .contenedor-botones {
             display: flex;
             gap: 40px;
-            margin-top: 50px; /* Bajado más abajo */
+            margin-bottom: 20px;
         }
 
         .btn-img {
@@ -80,13 +79,10 @@
         .btn-img:hover { transform: scale(1.1); }
 
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.5rem !important; }
-            .clock-labels { width: 100% !important; gap: 25px !important; }
-            .your-clock { transform: scale(0.5); margin-bottom: -40px; }
+            .titulo-grande { font-size: 2.5rem !important; margin-top: 10px; }
+            .clock-labels { width: 100% !important; gap: 10px !important; }
+            .your-clock { transform: scale(0.6); }
             .btn-img { width: 100px !important; }
-            .flip-clock-wrapper ul:nth-child(2),
-            .flip-clock-wrapper ul:nth-child(4),
-            .flip-clock-wrapper ul:nth-child(6) { margin-right: 15px !important; }
         }
     </style>
 </head>
@@ -94,16 +90,15 @@
 
     <h1 class="titulo-grande">Nuestro Día Especial</h1>
 
-    <div class="your-clock"></div>
-
-    <div class="clock-labels estilo-etiquetas">
-        <div>DÍAS</div>
-        <div>HRS</div>
-        <div>MINS</div>
-        <div>SEGS</div>
+    <div class="content-wrapper">
+        <div class="your-clock"></div>
+        <div class="clock-labels estilo-etiquetas">
+            <div>DÍAS</div>
+            <div>HRS</div>
+            <div>MINS</div>
+            <div>SEGS</div>
+        </div>
     </div>
-
-    <div class="texto-te-quiero">te quiero</div>
 
     <div class="contenedor-botones">
         <a href="tarjetas.html">
