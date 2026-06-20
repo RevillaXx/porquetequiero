@@ -4,43 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para mi novia</title>
-    
     <style>
         body { 
-            margin: 0; min-height: 100vh; 
-            display: flex; flex-direction: column; 
-            align-items: center; justify-content: center;
+            margin: 0; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; /* Centra todo el contenido verticalmente */
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            background-attachment: fixed;
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            text-align: center;
-            padding: 20px;
+            gap: 20px; /* Espacio uniforme entre todos los elementos */
+            padding: 10px;
         }
 
         .titulo-grande {
-            font-size: 4rem; 
+            font-size: 3rem; 
             color: #09a4ec; 
-            margin-bottom: 20px;
-            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
-                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 3px 3px #414D68;
+            text-align: center;
+            margin: 0;
+            text-shadow: 2px 2px 4px #414D68;
         }
 
         .contenedor-contador {
-            margin: 15px 0;
             background: rgba(255, 255, 255, 0.7);
             padding: 15px;
-            border-radius: 15px;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .label-contador {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #414D68;
             font-weight: bold;
         }
 
         .valor-contador {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #ff4d6d;
             font-weight: bold;
             margin-top: 5px;
@@ -49,20 +53,23 @@
         .contenedor-botones {
             display: flex;
             gap: 20px;
-            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite que los botones bajen si no caben */
+            margin-top: 10px;
         }
 
         .btn-img {
-            width: 120px; 
+            width: 80px; 
             cursor: pointer; 
             transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
 
+        /* Adaptación móvil */
         @media (max-width: 600px) {
             .titulo-grande { font-size: 2rem; }
             .valor-contador { font-size: 1.2rem; }
-            .btn-img { width: 70px; }
+            .btn-img { width: 60px; }
         }
     </style>
 </head>
@@ -72,12 +79,12 @@
 
     <div class="contenedor-contador">
         <div class="label-contador">💖 Tiempo juntos</div>
-        <div id="counter-juntos" class="valor-contador">00:00:00</div>
+        <div id="counter-juntos" class="valor-contador">Cargando...</div>
     </div>
 
     <div class="contenedor-contador">
         <div class="label-contador">⏳ Para nuestro día especial</div>
-        <div id="counter-especial" class="valor-contador">00:00:00</div>
+        <div id="counter-especial" class="valor-contador">Cargando...</div>
     </div>
 
     <div class="contenedor-botones">
@@ -87,14 +94,13 @@
     </div>
 
     <script>
-        // Fechas
         const startDate = new Date("2026-04-05T00:00:00");
         const specialDate = new Date("2026-07-06T00:00:00");
 
         function actualizarContadores() {
             const now = new Date();
 
-            // Lógica Tiempo Juntos
+            // Tiempo Juntos
             const diffJuntos = now - startDate;
             const dJ = Math.floor(diffJuntos / (1000 * 60 * 60 * 24));
             const hJ = Math.floor(diffJuntos / (1000 * 60 * 60)) % 24;
@@ -102,7 +108,7 @@
             const sJ = Math.floor(diffJuntos / 1000) % 60;
             document.getElementById("counter-juntos").innerHTML = `${dJ} días ${hJ}h ${mJ}m ${sJ}s`;
 
-            // Lógica Día Especial
+            // Tiempo Especial
             const diffEspecial = specialDate - now;
             const dE = Math.floor(diffEspecial / (1000 * 60 * 60 * 24));
             const hE = Math.floor(diffEspecial / (1000 * 60 * 60)) % 24;
