@@ -10,15 +10,18 @@
         body { 
             margin: 0; height: 100vh; 
             display: flex; flex-direction: column; 
-            align-items: center; justify-content: center;
+            align-items: center;
+            /* Usamos flex para distribuir los elementos de arriba a abajo */
+            justify-content: flex-start; 
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
         }
 
+        /* Título bajado para estar bajo la luna */
         .titulo-grande {
-            font-size: 4rem; 
-            margin-top: 50px; /* Espacio extra arriba */
-            margin-bottom: 40px; /* Más espacio debajo del título */
+            font-size: 5rem; 
+            margin-top: 200px; /* Ajusta este valor para bajar/subir el título bajo la luna */
+            margin-bottom: 30px;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -40,23 +43,26 @@
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
         }
 
+        /* Separación entre los bloques del reloj */
         .your-clock { 
             display: flex; justify-content: center; 
+            gap: 20px; /* Crea espacio entre los dígitos */
             margin-bottom: 5px; 
         }
 
         .clock-labels {
             display: flex; justify-content: center;
-            width: 460px;
-            gap: 60px;
-            margin-bottom: 50px; /* Más espacio debajo de las etiquetas */
+            width: 500px;
+            gap: 70px; /* Alineación con los bloques */
+            margin-bottom: 40px;
         }
 
+        /* Empuja los botones al pie de la página */
         .contenedor-botones {
+            margin-top: auto;
+            margin-bottom: 30px;
             display: flex;
-            gap: 50px;
-            margin-top: 50px; /* Botones más abajo */
-            padding-bottom: 50px; /* Espacio extra al final */
+            gap: 40px;
         }
 
         .btn-img {
@@ -66,13 +72,11 @@
         }
         .btn-img:hover { transform: scale(1.1); }
 
-        /* Adaptación para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.2rem !important; margin-top: 20px; margin-bottom: 25px; }
-            .clock-labels { width: 100% !important; gap: 10px !important; margin-bottom: 30px; }
-            .your-clock { transform: scale(0.55); margin-bottom: -40px; }
-            .contenedor-botones { margin-top: 40px; gap: 30px; }
-            .btn-img { width: 90px !important; } 
+            .titulo-grande { font-size: 2rem !important; margin-top: 120px; }
+            .your-clock { transform: scale(0.5); gap: 10px; }
+            .clock-labels { width: 100% !important; gap: 20px !important; }
+            .btn-img { width: 90px !important; }
         }
     </style>
 </head>
