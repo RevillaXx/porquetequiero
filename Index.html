@@ -11,14 +11,14 @@
             margin: 0; height: 100vh; 
             display: flex; flex-direction: column; 
             align-items: center; 
-            justify-content: space-between; /* Distribuye espacio verticalmente */
+            justify-content: space-between; /* Reparte elementos */
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            padding-bottom: 50px; /* Margen inferior para los botones */
+            overflow: hidden; /* Evita scroll */
         }
 
         .titulo-grande {
-            font-size: 5rem; 
+            font-size: 3.5rem; 
             margin-top: 30px; /* Margen superior 30px */
             margin-bottom: 0;
             text-align: center;
@@ -26,57 +26,44 @@
             font-weight: bold; 
             color: #09a4ec; 
             text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
-                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
-                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
-                         7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
-        }
-
-        .contenedor-reloj {
-            display: flex; flex-direction: column; align-items: center;
+                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 3px 3px #414D68;
         }
 
         .estilo-etiquetas {
-            text-align: center; 
+            display: flex;
+            justify-content: center;
+            width: 100%;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
-            font-size: 20px; 
+            font-size: 16px; 
             color: #EBD758; 
-            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
-                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
-                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
+            text-shadow: 1px 1px 2px #414D68;
+            margin-top: -10px;
         }
 
         .your-clock { 
             display: flex; justify-content: center; 
-            margin-bottom: 5px; 
+            transform: scale(0.7); /* Centrado y ajuste */
         }
 
-        /* Separación de 20px entre bloques del contador */
+        /* Espaciado para el reloj */
         .flip-clock-wrapper ul { margin: 0 10px !important; }
-
-        .clock-labels {
-            display: flex; justify-content: center;
-            width: 100%;
-            max-width: 460px;
-            gap: 45px;
-        }
 
         .contenedor-botones {
             display: flex;
             gap: 40px;
-            margin-top: auto; /* Empuja los botones al final */
+            margin-bottom: 50px; /* Margen inferior 50px */
         }
 
         .btn-img {
-            width: 130px; cursor: pointer; transition: transform 0.3s;
+            width: 100px; cursor: pointer; transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
 
+        /* Ajuste fino para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.5rem !important; }
-            .your-clock { transform: scale(0.65); }
-            .clock-labels { gap: 30px !important; font-size: 16px !important; }
-            .btn-img { width: 100px !important; }
+            .titulo-grande { font-size: 2.2rem !important; }
+            .your-clock { transform: scale(0.55); margin: -20px 0; }
         }
     </style>
 </head>
@@ -84,14 +71,13 @@
 
     <h1 class="titulo-grande">Nuestro Día Especial</h1>
 
-    <div class="contenedor-reloj">
-        <div class="your-clock"></div>
-        <div class="clock-labels estilo-etiquetas">
-            <div>DÍAS</div>
-            <div>HRS</div>
-            <div>MINS</div>
-            <div>SEGS</div>
-        </div>
+    <div class="your-clock"></div>
+
+    <div class="estilo-etiquetas">
+        <div style="margin-right: 45px;">DÍAS</div>
+        <div style="margin-right: 45px;">HRS</div>
+        <div style="margin-right: 45px;">MINS</div>
+        <div>SEGS</div>
     </div>
 
     <div class="contenedor-botones">
