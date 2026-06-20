@@ -11,16 +11,16 @@
             margin: 0; height: 100vh; 
             display: flex; flex-direction: column; 
             align-items: center; 
-            justify-content: flex-start; /* Alinea todo arriba para empezar */
+            justify-content: space-between; /* Distribuye espacio verticalmente */
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            position: relative; /* Necesario para posicionar los botones abajo */
+            padding-bottom: 50px; /* Margen inferior para los botones */
         }
 
         .titulo-grande {
             font-size: 5rem; 
-            margin-top: 20px; /* Margen superior solicitado */
-            margin-bottom: 30px;
+            margin-top: 30px; /* Margen superior 30px */
+            margin-bottom: 0;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -29,6 +29,10 @@
                          -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
                          7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+        }
+
+        .contenedor-reloj {
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .estilo-etiquetas {
@@ -45,39 +49,33 @@
         .your-clock { 
             display: flex; justify-content: center; 
             margin-bottom: 5px; 
-            margin-top: 50px;
         }
 
-        /* Separación de 10px en los divisores del contador */
-        .flip-clock-divider { margin: 0 5px !important; }
+        /* Separación de 20px entre bloques del contador */
+        .flip-clock-wrapper ul { margin: 0 10px !important; }
 
         .clock-labels {
             display: flex; justify-content: center;
-            width: 90%;
+            width: 100%;
             max-width: 460px;
-            gap: 10px;
-            margin-bottom: 40px;
+            gap: 45px;
         }
 
         .contenedor-botones {
-            position: absolute; /* Fija los botones abajo */
-            bottom: 20px;       /* Margen de 20px desde abajo */
             display: flex;
             gap: 40px;
+            margin-top: auto; /* Empuja los botones al final */
         }
 
         .btn-img {
-            width: 130px; 
-            cursor: pointer; 
-            transition: transform 0.3s;
+            width: 130px; cursor: pointer; transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
 
-        /* Adaptación para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.2rem !important; margin-top: 20px; margin-bottom: 15px; }
-            .your-clock { transform: scale(0.55); margin-top: 10px; }
-            .clock-labels { gap: 25px !important; font-size: 16px !important; }
+            .titulo-grande { font-size: 2.5rem !important; }
+            .your-clock { transform: scale(0.65); }
+            .clock-labels { gap: 30px !important; font-size: 16px !important; }
             .btn-img { width: 100px !important; }
         }
     </style>
@@ -86,13 +84,14 @@
 
     <h1 class="titulo-grande">Nuestro Día Especial</h1>
 
-    <div class="your-clock"></div>
-
-    <div class="clock-labels estilo-etiquetas">
-        <div>DÍAS</div>
-        <div>HRS</div>
-        <div>MINS</div>
-        <div>SEGS</div>
+    <div class="contenedor-reloj">
+        <div class="your-clock"></div>
+        <div class="clock-labels estilo-etiquetas">
+            <div>DÍAS</div>
+            <div>HRS</div>
+            <div>MINS</div>
+            <div>SEGS</div>
+        </div>
     </div>
 
     <div class="contenedor-botones">
