@@ -10,49 +10,54 @@
         body { 
             margin: 0; height: 100vh; 
             display: flex; flex-direction: column; 
-            align-items: center; 
-            justify-content: space-between; /* Reparte elementos */
+            align-items: center;
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            overflow: hidden; /* Evita scroll */
+            overflow: hidden; /* Evita el scroll */
         }
 
+        .header-wrapper { margin-top: 30px; width: 100%; text-align: center; }
+
         .titulo-grande {
-            font-size: 3.5rem; 
-            margin-top: 30px; /* Margen superior 30px */
-            margin-bottom: 0;
-            text-align: center;
+            font-size: 4rem; 
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             color: #09a4ec; 
             text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
-                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 3px 3px #414D68;
+                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
+                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
+        }
+
+        /* Desplaza el reloj 50px debajo del centro visual */
+        .your-clock { 
+            display: flex; justify-content: center; 
+            margin-top: 50px;
+        }
+
+        /* Espaciado de 20px entre grupos del FlipClock */
+        .flip-clock-wrapper ul { margin: 0 10px !important; }
+
+        .clock-labels {
+            display: flex; justify-content: center;
+            width: 100%;
+            gap: 45px;
+            margin-top: 10px;
         }
 
         .estilo-etiquetas {
-            display: flex;
-            justify-content: center;
-            width: 100%;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
-            font-size: 16px; 
+            font-size: 18px; 
             color: #EBD758; 
-            text-shadow: 1px 1px 2px #414D68;
-            margin-top: -10px;
+            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68;
         }
 
-        .your-clock { 
-            display: flex; justify-content: center; 
-            transform: scale(0.7); /* Centrado y ajuste */
-        }
-
-        /* Espaciado para el reloj */
-        .flip-clock-wrapper ul { margin: 0 10px !important; }
-
+        /* Botones fijados abajo */
         .contenedor-botones {
+            position: fixed;
+            bottom: 50px;
             display: flex;
             gap: 40px;
-            margin-bottom: 50px; /* Margen inferior 50px */
         }
 
         .btn-img {
@@ -60,33 +65,32 @@
         }
         .btn-img:hover { transform: scale(1.1); }
 
-        /* Ajuste fino para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.2rem !important; }
-            .your-clock { transform: scale(0.55); margin: -20px 0; }
+            .titulo-grande { font-size: 2.2rem; }
+            .your-clock { transform: scale(0.55); margin-top: 20px; }
+            .clock-labels { gap: 30px; margin-top: -30px; }
+            .btn-img { width: 80px; }
         }
     </style>
 </head>
 <body>
 
-    <h1 class="titulo-grande">Nuestro Día Especial</h1>
+    <div class="header-wrapper">
+        <h1 class="titulo-grande">Nuestro Día Especial</h1>
+    </div>
 
     <div class="your-clock"></div>
 
-    <div class="estilo-etiquetas">
-        <div style="margin-right: 45px;">DÍAS</div>
-        <div style="margin-right: 45px;">HRS</div>
-        <div style="margin-right: 45px;">MINS</div>
+    <div class="clock-labels estilo-etiquetas">
+        <div>DÍAS</div>
+        <div>HRS</div>
+        <div>MINS</div>
         <div>SEGS</div>
     </div>
 
     <div class="contenedor-botones">
-        <a href="tarjetas.html">
-            <img src="corazon.png" class="btn-img" alt="Regalo">
-        </a>
-        <a href="chistes.html">
-            <img src="risa.png" class="btn-img" alt="Chistes">
-        </a>
+        <a href="tarjetas.html"><img src="corazon.png" class="btn-img" alt="Regalo"></a>
+        <a href="chistes.html"><img src="risa.png" class="btn-img" alt="Chistes"></a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
