@@ -8,76 +8,85 @@
     
     <style>
         body { 
-            margin: 0; height: 100vh; 
-            display: flex; flex-direction: column; 
-            align-items: center;
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start; /* Alineado al top */
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            overflow: hidden; /* Evita el scroll */
+            padding-top: 30px; /* Margen superior solicitado */
         }
 
-        .header-wrapper { margin-top: 30px; width: 100%; text-align: center; }
-
         .titulo-grande {
-            font-size: 4rem; 
+            font-size: 3.5rem; 
+            margin: 0;
+            text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             color: #09a4ec; 
             text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
                          -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
+                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
+                         7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+        }
+
+        .estilo-etiquetas {
+            text-align: center; 
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            font-weight: bold; 
+            font-size: 16px; 
+            color: #EBD758; 
+            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
+                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
         }
 
-        /* Desplaza el reloj 50px debajo del centro visual */
+        /* Espaciado del contador */
         .your-clock { 
-            display: flex; justify-content: center; 
-            margin-top: 50px;
+            margin-top: 170px; /* Ajuste para bajarlo a 200px del top total */
+            display: flex; 
+            justify-content: center;
         }
 
-        /* Espaciado de 20px entre grupos del FlipClock */
-        .flip-clock-wrapper ul { margin: 0 10px !important; }
+        /* Separación de 30px entre grupos de dígitos */
+        .flip-clock-wrapper ul { margin: 0 15px !important; }
 
         .clock-labels {
             display: flex; justify-content: center;
             width: 100%;
-            gap: 45px;
+            gap: 40px;
             margin-top: 10px;
         }
 
-        .estilo-etiquetas {
-            font-family: 'Comic Sans MS', cursive, sans-serif; 
-            font-weight: bold; 
-            font-size: 18px; 
-            color: #EBD758; 
-            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68;
-        }
-
-        /* Botones fijados abajo */
+        /* Botones al final */
         .contenedor-botones {
-            position: fixed;
-            bottom: 50px;
+            position: absolute;
+            bottom: 50px; /* Margen desde abajo solicitado */
             display: flex;
             gap: 40px;
         }
 
         .btn-img {
-            width: 100px; cursor: pointer; transition: transform 0.3s;
+            width: 100px; 
+            cursor: pointer; 
+            transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
 
+        /* Adaptación para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.2rem; }
-            .your-clock { transform: scale(0.55); margin-top: 20px; }
-            .clock-labels { gap: 30px; margin-top: -30px; }
-            .btn-img { width: 80px; }
+            .titulo-grande { font-size: 2.2rem !important; }
+            .your-clock { transform: scale(0.7); margin-top: 100px; }
+            .clock-labels { gap: 20px !important; font-size: 14px !important; }
+            .btn-img { width: 80px !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-wrapper">
-        <h1 class="titulo-grande">Nuestro Día Especial</h1>
-    </div>
+    <h1 class="titulo-grande">Nuestro Día Especial</h1>
 
     <div class="your-clock"></div>
 
@@ -89,8 +98,12 @@
     </div>
 
     <div class="contenedor-botones">
-        <a href="tarjetas.html"><img src="corazon.png" class="btn-img" alt="Regalo"></a>
-        <a href="chistes.html"><img src="risa.png" class="btn-img" alt="Chistes"></a>
+        <a href="tarjetas.html">
+            <img src="corazon.png" class="btn-img" alt="Regalo">
+        </a>
+        <a href="chistes.html">
+            <img src="risa.png" class="btn-img" alt="Chistes">
+        </a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
