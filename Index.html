@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi novia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
+    
+    <style>
+        body { 
+            margin: 0; height: 100vh; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center;
+            background: url('FOTO.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .titulo-grande {
+            font-size: 5rem; 
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            font-weight: bold; 
+            color: #09a4ec; 
+            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
+                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
+                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
+                         7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+        }
+
+        .estilo-etiquetas {
+            text-align: center; 
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            font-weight: bold; 
+            font-size: 20px; 
+            color: #EBD758; 
+            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
+                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
+                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
+        }
+
+        .your-clock { 
+            display: flex; justify-content: center; 
+            margin-bottom: 5px; 
+        }
+
+        .clock-labels {
+            display: flex; justify-content: center;
+            width: 460px;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .contenedor-botones {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .btn-img {
+            width: 130px; /* Tamaño grande */
+            cursor: pointer; 
+            transition: transform 0.3s;
+        }
+        .btn-img:hover { transform: scale(1.1); }
+
+        /* Adaptación para móviles */
+        @media (max-width: 600px) {
+            .titulo-grande { font-size: 2.5rem !important; margin-bottom: 15px; }
+            .clock-labels { width: 100% !important; gap: 10px !important; }
+            .your-clock { transform: scale(0.6); margin-bottom: -30px; }
+            .btn-img { width: 100px !important; } /* Tamaño grande en móvil */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="titulo-grande">Nuestro Día Especial</h1>
+
+    <div class="your-clock"></div>
+
+    <div class="clock-labels estilo-etiquetas">
+        <div>DÍAS</div>
+        <div>HRS</div>
+        <div>MINS</div>
+        <div>SEGS</div>
+    </div>
+
+    <div class="contenedor-botones">
+        <a href="tarjetas.html">
+            <img src="corazon.png" class="btn-img" alt="Regalo">
+        </a>
+        <a href="chistes.html">
+            <img src="risa.png" class="btn-img" alt="Chistes">
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var fechaDestino = new Date("2026-07-06T00:00:00").getTime();
+            var ahora = new Date().getTime();
+            var diferencia = (fechaDestino - ahora) / 1000;
+
+            $('.your-clock').FlipClock(diferencia, {
+                clockFace: 'DailyCounter',
+                countdown: true
+            });
+
+            $('.flip-clock-label').hide();
+        });
+    </script>
+</body>
+</html>
