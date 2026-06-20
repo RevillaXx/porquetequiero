@@ -9,29 +9,19 @@
     <style>
         body { 
             margin: 0; 
-            height: 100vh; 
-            /* El fondo queda fijo y no hace scroll */
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: space-between; /* Distribuye el espacio */
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Distribuye elementos verticalmente */
-            align-items: center;
-        }
-
-        /* Contenedor principal para organizar verticalmente */
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            justify-content: space-between;
+            background-attachment: fixed; /* Fondo fijo */
         }
 
         .titulo-grande {
             font-size: 5rem; 
-            margin-top: 30px; /* Margen superior de 30px */
+            margin-top: 30px; /* Margen superior solicitado */
             margin-bottom: 0;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
@@ -41,14 +31,6 @@
                          -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
                          7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
-        }
-
-        .clock-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-grow: 1;
-            justify-content: center; /* Centra el contador en la pantalla */
         }
 
         .estilo-etiquetas {
@@ -62,7 +44,17 @@
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
         }
 
-        .your-clock { margin-bottom: 5px; }
+        .reloj-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: auto 0; /* Centra verticalmente el bloque del reloj */
+        }
+
+        .your-clock { 
+            display: flex; justify-content: center; 
+            margin-bottom: 5px; 
+        }
 
         .clock-labels {
             display: flex; justify-content: center;
@@ -73,7 +65,7 @@
         .contenedor-botones {
             display: flex;
             gap: 40px;
-            margin-bottom: 100px; /* Margen inferior de 100px */
+            margin-bottom: 100px; /* Margen inferior solicitado */
         }
 
         .btn-img {
@@ -83,38 +75,36 @@
         }
         .btn-img:hover { transform: scale(1.1); }
 
+        /* Adaptación para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.5rem !important; }
+            .titulo-grande { font-size: 2.5rem !important; margin-top: 20px; }
             .clock-labels { width: 100% !important; gap: 10px !important; }
             .your-clock { transform: scale(0.6); }
             .btn-img { width: 100px !important; }
-            .contenedor-botones { margin-bottom: 60px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <h1 class="titulo-grande">Nuestro Día Especial</h1>
+    <h1 class="titulo-grande">Nuestro Día Especial</h1>
 
-        <div class="clock-wrapper">
-            <div class="your-clock"></div>
-            <div class="clock-labels estilo-etiquetas">
-                <div>DÍAS</div>
-                <div>HRS</div>
-                <div>MINS</div>
-                <div>SEGS</div>
-            </div>
+    <div class="reloj-container">
+        <div class="your-clock"></div>
+        <div class="clock-labels estilo-etiquetas">
+            <div>DÍAS</div>
+            <div>HRS</div>
+            <div>MINS</div>
+            <div>SEGS</div>
         </div>
+    </div>
 
-        <div class="contenedor-botones">
-            <a href="tarjetas.html">
-                <img src="corazon.png" class="btn-img" alt="Regalo">
-            </a>
-            <a href="chistes.html">
-                <img src="risa.png" class="btn-img" alt="Chistes">
-            </a>
-        </div>
+    <div class="contenedor-botones">
+        <a href="tarjetas.html">
+            <img src="corazon.png" class="btn-img" alt="Regalo">
+        </a>
+        <a href="chistes.html">
+            <img src="risa.png" class="btn-img" alt="Chistes">
+        </a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
