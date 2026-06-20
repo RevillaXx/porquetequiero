@@ -8,41 +8,52 @@
     
     <style>
         body { 
-            margin: 0; height: 100vh; 
+            margin: 0; min-height: 100vh; 
             display: flex; flex-direction: column; 
-            align-items: center;
+            align-items: center; justify-content: center;
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
             background-attachment: fixed;
+            padding: 20px;
         }
 
         .titulo-grande {
-            font-size: 5rem; 
-            margin-top: 30px;
-            margin-bottom: auto;
+            font-size: 4rem; 
+            margin-top: 20px;
+            margin-bottom: 20px;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             color: #09a4ec; 
             text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
-                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
-                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
-                         7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 3px 3px #414D68;
         }
 
-        /* Reducción de tamaño aplicada directamente al contenedor del reloj */
+        /* Estilos nuevo contador */
+        .counter-section {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        #counter {
+            font-size: 2rem;
+            margin-top: 5px;
+            color: #ff4d6d;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #fff;
+        }
+
+        /* Estilos contador original */
         .your-clock { 
-            transform: scale(0.7); 
+            transform: scale(0.6); 
             transform-origin: center;
-            margin: 0;
-            padding: 0;
+            margin: -20px 0;
         }
 
         .contenedor-botones {
             display: flex;
             gap: 20px;
-            margin-bottom: 100px;
-            margin-top: auto;
+            margin-top: 20px;
         }
 
         .btn-img {
@@ -54,15 +65,21 @@
 
         /* Adaptación para móviles */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.5rem !important; margin-top: 30px; }
-            .your-clock { transform: scale(0.45); }
-            .btn-img { width: 80px !important; }
+            .titulo-grande { font-size: 2rem !important; }
+            .your-clock { transform: scale(0.4); margin: -40px 0; }
+            #counter { font-size: 1.3rem; }
+            .btn-img { width: 70px !important; }
         }
     </style>
 </head>
 <body>
 
     <h1 class="titulo-grande">Nuestro Día Especial</h1>
+
+    <section class="counter-section">
+        <h2 style="margin:0; color: #fff;">💖 Tiempo juntos</h2>
+        <div id="counter">00:00:00</div>
+    </section>
 
     <div class="your-clock"></div>
 
@@ -83,6 +100,22 @@
 
     <script>
         $(document).ready(function() {
+            // Lógica Contador: Tiempo Juntos
+            const startDate = new Date("2026-04-05T00:00:00");
+            function updateCounter() {
+                const now = new Date();
+                const diff = now - startDate;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+                const minutes = Math.floor(diff / (1000 * 60)) % 60;
+                const seconds = Math.floor(diff / 1000) % 60;
+                document.getElementById("counter").innerHTML =
+                    `${days} días ${hours}h ${minutes}m ${seconds}s`;
+            }
+            setInterval(updateCounter, 1000);
+            updateCounter();
+
+            // Lógica Contador: Cuenta regresiva original
             var fechaDestino = new Date("2026-07-06T00:00:00").getTime();
             var ahora = new Date().getTime();
             var diferencia = (fechaDestino - ahora) / 1000;
