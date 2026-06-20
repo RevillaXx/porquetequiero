@@ -41,7 +41,6 @@
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
         }
 
-        /* Eliminado justify-content para que el reloj mantenga su ancho natural */
         .your-clock { 
             display: flex;
             margin-bottom: 5px; 
@@ -56,13 +55,13 @@
 
         .contenedor-botones {
             display: flex;
-            gap: 40px;
+            gap: 20px; /* Reducido un poco para que quepan los 3 */
             margin-bottom: 100px;
             margin-top: auto;
         }
 
         .btn-img {
-            width: 130px; 
+            width: 120px; /* Ajustado ligeramente para acomodar 3 imágenes */
             cursor: pointer; 
             transition: transform 0.3s;
         }
@@ -73,7 +72,7 @@
             .titulo-grande { font-size: 2.5rem !important; margin-top: 30px; }
             .clock-labels { width: 100% !important; gap: 10px !important; }
             .your-clock { transform: scale(0.6); }
-            .btn-img { width: 100px !important; }
+            .btn-img { width: 80px !important; }
         }
     </style>
 </head>
@@ -96,6 +95,9 @@
         </a>
         <a href="chistes.html">
             <img src="risa.png" class="btn-img" alt="Chistes">
+        </a>
+        <a href="buenos dias.html">
+            <img src="buenos dias.png" class="btn-img" alt="Buenos Días">
         </a>
     </div>
 
