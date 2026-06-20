@@ -11,65 +11,65 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            justify-content: center; /* Centra todo el contenido verticalmente */
+            justify-content: center; /* Centra todo verticalmente */
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            gap: 20px; /* Espacio uniforme entre todos los elementos */
-            padding: 10px;
+            gap: 25px; /* Espacio uniforme entre TODOS los elementos */
+            padding: 20px;
         }
 
         .titulo-grande {
-            font-size: 3rem; 
+            font-size: 3.5rem; 
             color: #09a4ec; 
-            text-align: center;
             margin: 0;
+            text-align: center;
             text-shadow: 2px 2px 4px #414D68;
         }
 
         .contenedor-contador {
             background: rgba(255, 255, 255, 0.7);
-            padding: 15px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 25px;
             text-align: center;
             width: 90%;
-            max-width: 400px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 450px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .label-contador {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #414D68;
             font-weight: bold;
+            margin-bottom: 5px;
         }
 
         .valor-contador {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: #ff4d6d;
             font-weight: bold;
-            margin-top: 5px;
         }
 
         .contenedor-botones {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
-            flex-wrap: wrap; /* Permite que los botones bajen si no caben */
-            margin-top: 10px;
+            align-items: center;
         }
 
         .btn-img {
-            width: 80px; 
+            width: 90px; 
             cursor: pointer; 
             transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
 
-        /* Adaptación móvil */
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2rem; }
-            .valor-contador { font-size: 1.2rem; }
-            .btn-img { width: 60px; }
+            .titulo-grande { font-size: 2.2rem; }
+            .contenedor-contador { padding: 15px; }
+            .valor-contador { font-size: 1.3rem; }
+            .btn-img { width: 70px; }
+            body { gap: 15px; } /* Menos espacio en móviles para que quepa todo */
         }
     </style>
 </head>
@@ -88,37 +88,30 @@
     </div>
 
     <div class="contenedor-botones">
-        <a href="tarjetas.html"><img src="corazon.png" class="btn-img" alt="Regalo"></a>
-        <a href="chistes.html"><img src="risa.png" class="btn-img" alt="Chistes"></a>
-        <a href="buenos dias.html"><img src="buenos dias.png" class="btn-img" alt="Buenos Días"></a>
+        <a href="tarjetas.html"><img src="corazon.png" class="btn-img"></a>
+        <a href="chistes.html"><img src="risa.png" class="btn-img"></a>
+        <a href="buenos dias.html"><img src="buenos dias.png" class="btn-img"></a>
     </div>
 
     <script>
         const startDate = new Date("2026-04-05T00:00:00");
         const specialDate = new Date("2026-07-06T00:00:00");
 
-        function actualizarContadores() {
+        function actualizar() {
             const now = new Date();
+            
+            // Lógica tiempo juntos
+            const diffJ = now - startDate;
+            document.getElementById("counter-juntos").innerHTML = 
+                `${Math.floor(diffJ / (1000*60*60*24))} días ${Math.floor(diffJ/(1000*60*60)%24)}h ${Math.floor(diffJ/(1000*60)%60)}m ${Math.floor(diffJ/1000%60)}s`;
 
-            // Tiempo Juntos
-            const diffJuntos = now - startDate;
-            const dJ = Math.floor(diffJuntos / (1000 * 60 * 60 * 24));
-            const hJ = Math.floor(diffJuntos / (1000 * 60 * 60)) % 24;
-            const mJ = Math.floor(diffJuntos / (1000 * 60)) % 60;
-            const sJ = Math.floor(diffJuntos / 1000) % 60;
-            document.getElementById("counter-juntos").innerHTML = `${dJ} días ${hJ}h ${mJ}m ${sJ}s`;
-
-            // Tiempo Especial
-            const diffEspecial = specialDate - now;
-            const dE = Math.floor(diffEspecial / (1000 * 60 * 60 * 24));
-            const hE = Math.floor(diffEspecial / (1000 * 60 * 60)) % 24;
-            const mE = Math.floor(diffEspecial / (1000 * 60)) % 60;
-            const sE = Math.floor(diffEspecial / 1000) % 60;
-            document.getElementById("counter-especial").innerHTML = `${dE} días ${hE}h ${mE}m ${sE}s`;
+            // Lógica día especial
+            const diffE = specialDate - now;
+            document.getElementById("counter-especial").innerHTML = 
+                `${Math.floor(diffE / (1000*60*60*24))} días ${Math.floor(diffE/(1000*60*60)%24)}h ${Math.floor(diffE/(1000*60)%60)}m ${Math.floor(diffE/1000%60)}s`;
         }
-
-        setInterval(actualizarContadores, 1000);
-        actualizarContadores();
+        setInterval(actualizar, 1000);
+        actualizar();
     </script>
 </body>
 </html>
