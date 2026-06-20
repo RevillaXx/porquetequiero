@@ -18,7 +18,7 @@
 
         .titulo-grande {
             font-size: 5rem; 
-            margin-top: 30px; 
+            margin-top: 30px;
             margin-bottom: auto;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
@@ -41,18 +41,16 @@
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
         }
 
-        /* Contenedor que mantiene el ancho original del reloj para evitar que se junten los números */
-        .clock-container {
-            width: 480px; 
-            display: flex;
-            justify-content: center;
-            margin-bottom: 5px;
+        /* Se eliminó display: flex y justify-content: center aquí para no comprimir los números */
+        .your-clock { 
+            margin-bottom: 5px; 
+            margin-top: auto;
         }
 
         .clock-labels {
             display: flex; justify-content: center;
-            width: 480px;
-            gap: 65px;
+            width: 460px;
+            gap: 60px;
             margin-bottom: auto;
         }
 
@@ -70,10 +68,11 @@
         }
         .btn-img:hover { transform: scale(1.1); }
 
+        /* Adaptación para móviles */
         @media (max-width: 600px) {
             .titulo-grande { font-size: 2.5rem !important; margin-top: 30px; }
-            .clock-container { width: 100% !important; transform: scale(0.65); }
             .clock-labels { width: 100% !important; gap: 10px !important; }
+            .your-clock { transform: scale(0.6); }
             .btn-img { width: 100px !important; }
         }
     </style>
@@ -82,9 +81,7 @@
 
     <h1 class="titulo-grande">Nuestro Día Especial</h1>
 
-    <div class="clock-container">
-        <div class="your-clock"></div>
-    </div>
+    <div class="your-clock"></div>
 
     <div class="clock-labels estilo-etiquetas">
         <div>DÍAS</div>
