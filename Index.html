@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para mi novia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
     
@@ -10,16 +10,16 @@
         body { 
             margin: 0; height: 100vh; 
             display: flex; flex-direction: column; 
-            align-items: center; justify-content: center;
+            align-items: center; 
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            overflow: hidden; /* Evita scroll */
+            overflow: hidden; /* Evita el scroll */
         }
 
+        /* 3- Subir título con margen superior */
         .titulo-grande {
-            position: absolute;
-            top: 30px;
-            font-size: 4rem; 
+            margin-top: 30px;
+            font-size: 3rem; 
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -29,44 +29,41 @@
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68;
         }
 
+        /* 1- Centrar contador */
+        .your-clock { 
+            display: flex; justify-content: center; 
+            margin-top: auto; 
+            margin-bottom: auto;
+            transform: scale(0.85); /* Escala para que no se corte */
+        }
+
+        /* 2- Separación de 20px entre bloques (CSS de FlipClock) */
+        .flip-clock-wrapper ul { margin: 0 10px !important; }
+
         .estilo-etiquetas {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            gap: 45px;
+            text-align: center; 
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             font-size: 16px; 
             color: #EBD758; 
             text-shadow: 1px 1px 2px #414D68;
-            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+            gap: 45px;
+            margin-bottom: 20px;
         }
 
-        .your-clock { 
-            display: flex; justify-content: center; 
-        }
-
-        /* Separación de 20px entre grupos de dígitos */
-        .flip-clock-wrapper ul { margin: 0 10px !important; }
-
+        /* 4- Margen inferior de 100px para botones */
         .contenedor-botones {
-            position: absolute;
-            bottom: 100px;
             display: flex;
             gap: 40px;
+            margin-bottom: 100px;
         }
 
         .btn-img {
-            width: 90px; cursor: pointer; transition: transform 0.3s;
-        }
-        .btn-img:hover { transform: scale(1.1); }
-
-        /* Ajustes para móviles */
-        @media (max-width: 600px) {
-            .titulo-grande { font-size: 2rem !important; }
-            .your-clock { transform: scale(0.7); }
-            .estilo-etiquetas { gap: 25px; margin-top: 80px; }
-            .btn-img { width: 70px !important; }
+            width: 100px; 
+            cursor: pointer; 
+            transition: transform 0.3s;
         }
     </style>
 </head>
@@ -76,7 +73,7 @@
 
     <div class="your-clock"></div>
 
-    <div class="estilo-etiquetas">
+    <div class="clock-labels estilo-etiquetas">
         <div>DÍAS</div>
         <div>HRS</div>
         <div>MINS</div>
