@@ -17,8 +17,7 @@
 
         .titulo-grande {
             font-size: 5rem; 
-            margin-top: -50px; /* Subido más arriba */
-            margin-bottom: 50px; /* Espacio extra debajo del título */
+            margin-bottom: 50px; /* Ajustado para dar más espacio sobre el reloj */
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -42,36 +41,40 @@
 
         .your-clock { 
             display: flex; justify-content: center; 
-            margin-bottom: 10px;
+            margin-bottom: 5px; 
         }
 
-        /* Fuerza la separación entre los grupos de dígitos del reloj */
-        .flip-clock-wrapper ul { margin: 0 5px !important; }
+        /* Añadimos espacio entre los grupos del reloj */
+        .flip-clock-wrapper ul {
+            margin: 0 10px !important; /* Espacio entre días, horas, mins, segs */
+        }
 
         .clock-labels {
             display: flex; justify-content: center;
             width: 460px;
-            gap: 65px; /* Ajuste preciso para la nueva separación */
-            margin-bottom: 60px; /* Más espacio antes de los botones */
+            gap: 65px; /* Ajustado para coincidir con la separación del reloj */
+            margin-bottom: 40px;
         }
 
         .contenedor-botones {
             display: flex;
-            gap: 50px;
-            margin-top: 30px; /* Botones más abajo */
+            gap: 40px;
+            margin-top: 80px; /* Bajamos los botones aún más */
         }
 
         .btn-img {
-            width: 130px; cursor: pointer; transition: transform 0.3s;
+            width: 130px; 
+            cursor: pointer; 
+            transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
 
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.2rem !important; margin-bottom: 30px; }
-            .clock-labels { width: 100% !important; gap: 20px !important; }
-            .your-clock { transform: scale(0.55); margin-bottom: 0px; }
-            .btn-img { width: 90px !important; }
-            .contenedor-botones { margin-top: 10px; }
+            .titulo-grande { font-size: 2.5rem !important; margin-bottom: 25px; }
+            .clock-labels { width: 100% !important; gap: 25px !important; }
+            .your-clock { transform: scale(0.6); margin-bottom: -10px; }
+            .btn-img { width: 100px !important; }
+            .contenedor-botones { margin-top: 50px; }
         }
     </style>
 </head>
