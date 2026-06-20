@@ -30,11 +30,7 @@
                          7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
         }
 
-        /* Ajuste necesario: quitamos display: flex para no romper FlipClock */
-        .your-clock { 
-            margin-bottom: 5px; 
-            width: auto;
-        }
+        /* Se eliminó cualquier estilo sobre .your-clock */
 
         .contenedor-botones {
             display: flex;
@@ -85,7 +81,7 @@
             var ahora = new Date().getTime();
             var diferencia = (fechaDestino - ahora) / 1000;
 
-            // FlipClock necesita su propio contenedor sin flexbox conflictivo
+            // FlipClock inicializado sin restricciones externas
             $('.your-clock').FlipClock(diferencia, {
                 clockFace: 'DailyCounter',
                 countdown: true
