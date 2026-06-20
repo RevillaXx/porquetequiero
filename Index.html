@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para mi novia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
     
@@ -11,15 +11,17 @@
             margin: 0; height: 100vh; 
             display: flex; flex-direction: column; 
             align-items: center; 
+            justify-content: flex-start; /* Permite controlar mejor las posiciones */
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden; /* Evita el scroll */
         }
 
-        /* 3- Subir título con margen superior */
+        /* 3. Título en la parte superior con margen de 30px */
         .titulo-grande {
+            font-size: 2.5rem; 
             margin-top: 30px;
-            font-size: 3rem; 
+            margin-bottom: 20px;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -29,42 +31,46 @@
                          3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68;
         }
 
-        /* 1- Centrar contador */
-        .your-clock { 
-            display: flex; justify-content: center; 
-            margin-top: auto; 
-            margin-bottom: auto;
-            transform: scale(0.85); /* Escala para que no se corte */
-        }
-
-        /* 2- Separación de 20px entre bloques (CSS de FlipClock) */
-        .flip-clock-wrapper ul { margin: 0 10px !important; }
-
         .estilo-etiquetas {
             text-align: center; 
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             font-size: 16px; 
             color: #EBD758; 
-            text-shadow: 1px 1px 2px #414D68;
-            display: flex;
-            justify-content: center;
-            gap: 45px;
-            margin-bottom: 20px;
+            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68;
         }
 
-        /* 4- Margen inferior de 100px para botones */
+        /* 1. Contador centrado */
+        .your-clock { 
+            display: flex; justify-content: center; 
+            margin-top: 50px;
+            transform: scale(0.7); /* Ajuste escala para móviles */
+        }
+
+        /* 2. Separación de 20px entre los grupos de números */
+        /* La librería FlipClock agrupa en .flip-clock-wrapper */
+        .flip-clock-wrapper ul { margin: 0 10px !important; } 
+
+        .clock-labels {
+            display: flex; justify-content: center;
+            width: 100%;
+            gap: 25px;
+            margin-top: -30px;
+            margin-bottom: 40px;
+        }
+
+        /* 4. Contenedor de botones con margen inferior de 100px */
         .contenedor-botones {
             display: flex;
             gap: 40px;
+            margin-top: auto; 
             margin-bottom: 100px;
         }
 
         .btn-img {
-            width: 100px; 
-            cursor: pointer; 
-            transition: transform 0.3s;
+            width: 100px; cursor: pointer; transition: transform 0.3s;
         }
+        .btn-img:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
