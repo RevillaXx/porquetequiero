@@ -8,82 +8,98 @@
     
     <style>
         body { 
-            margin: 0; height: 100vh; 
-            display: flex; flex-direction: column; 
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
             align-items: center; 
-            justify-content: flex-start; /* Permite controlar mejor las posiciones */
+            /* Espaciado automático para distribuir elementos */
+            justify-content: space-between; 
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden; /* Evita el scroll */
         }
 
-        /* 3. Título en la parte superior con margen de 30px */
+        /* 2- Título arriba con margen de 30px */
         .titulo-grande {
-            font-size: 2.5rem; 
-            margin-top: 30px;
-            margin-bottom: 20px;
+            font-size: 5rem; 
+            margin-top: 30px; 
+            margin-bottom: 0;
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             color: #09a4ec; 
             text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
                          -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
-                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68;
+                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
+                         7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+        }
+
+        /* 1- Contenedor del reloj centrado */
+        .centro-reloj {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1; /* Ocupa el espacio central disponible */
         }
 
         .estilo-etiquetas {
             text-align: center; 
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
-            font-size: 16px; 
+            font-size: 20px; 
             color: #EBD758; 
-            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68;
+            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
+                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
+                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
         }
 
-        /* 1. Contador centrado */
-        .your-clock { 
-            display: flex; justify-content: center; 
-            margin-top: 50px;
-            transform: scale(0.7); /* Ajuste escala para móviles */
-        }
-
-        /* 2. Separación de 20px entre los grupos de números */
-        /* La librería FlipClock agrupa en .flip-clock-wrapper */
-        .flip-clock-wrapper ul { margin: 0 10px !important; } 
+        .your-clock { display: flex; justify-content: center; }
 
         .clock-labels {
             display: flex; justify-content: center;
             width: 100%;
-            gap: 25px;
-            margin-top: -30px;
-            margin-bottom: 40px;
+            gap: 10%;
+            margin-top: 5px;
         }
 
-        /* 4. Contenedor de botones con margen inferior de 100px */
+        /* 3- Botones abajo con margen de 100px */
         .contenedor-botones {
             display: flex;
             gap: 40px;
-            margin-top: auto; 
-            margin-bottom: 100px;
+            margin-bottom: 100px; 
         }
 
         .btn-img {
-            width: 100px; cursor: pointer; transition: transform 0.3s;
+            width: 130px; 
+            cursor: pointer; 
+            transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
+
+        /* Adaptación móvil */
+        @media (max-width: 600px) {
+            .titulo-grande { font-size: 2.2rem !important; margin-top: 30px; }
+            .your-clock { transform: scale(0.5); }
+            .clock-labels { gap: 5px; font-size: 14px; }
+            .btn-img { width: 90px !important; }
+            .contenedor-botones { margin-bottom: 60px; } /* Ajuste fino para móviles */
+        }
     </style>
 </head>
 <body>
 
     <h1 class="titulo-grande">Nuestro Día Especial</h1>
 
-    <div class="your-clock"></div>
-
-    <div class="clock-labels estilo-etiquetas">
-        <div>DÍAS</div>
-        <div>HRS</div>
-        <div>MINS</div>
-        <div>SEGS</div>
+    <div class="centro-reloj">
+        <div class="your-clock"></div>
+        <div class="clock-labels estilo-etiquetas">
+            <div>DÍAS</div>
+            <div>HRS</div>
+            <div>MINS</div>
+            <div>SEGS</div>
+        </div>
     </div>
 
     <div class="contenedor-botones">
