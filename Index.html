@@ -17,7 +17,7 @@
 
         .titulo-grande {
             font-size: 5rem; 
-            margin-bottom: 10px; /* Acercado al reloj */
+            margin-bottom: 20px; /* Ajustado para subir */
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
@@ -44,17 +44,26 @@
             margin-bottom: 5px; 
         }
 
-        /* Separación entre grupos de dígitos del FlipClock */
-        .flip-clock-wrapper ul { margin-right: 15px !important; }
-        .flip-clock-wrapper ul:nth-child(2), 
-        .flip-clock-wrapper ul:nth-child(4), 
-        .flip-clock-wrapper ul:nth-child(6) { margin-right: 40px !important; }
+        /* Separación entre grupos de números del reloj (Días, Horas, Minutos) */
+        .flip-clock-wrapper ul:nth-child(2),
+        .flip-clock-wrapper ul:nth-child(4),
+        .flip-clock-wrapper ul:nth-child(6) {
+            margin-right: 30px !important; 
+        }
 
         .clock-labels {
             display: flex; justify-content: center;
             width: 460px;
-            gap: 48px; /* Ajustado para coincidir con la separación */
-            margin-bottom: 60px;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .texto-te-quiero {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 3rem;
+            color: white;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px #000;
         }
 
         .contenedor-botones {
@@ -64,16 +73,20 @@
         }
 
         .btn-img {
-            width: 130px; cursor: pointer; transition: transform 0.3s;
+            width: 130px; 
+            cursor: pointer; 
+            transition: transform 0.3s;
         }
         .btn-img:hover { transform: scale(1.1); }
 
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.5rem !important; margin-bottom: 10px; }
-            .clock-labels { width: 100% !important; gap: 5px !important; }
+            .titulo-grande { font-size: 2.5rem !important; }
+            .clock-labels { width: 100% !important; gap: 25px !important; }
             .your-clock { transform: scale(0.5); margin-bottom: -40px; }
             .btn-img { width: 100px !important; }
-            .contenedor-botones { margin-top: 20px; }
+            .flip-clock-wrapper ul:nth-child(2),
+            .flip-clock-wrapper ul:nth-child(4),
+            .flip-clock-wrapper ul:nth-child(6) { margin-right: 15px !important; }
         }
     </style>
 </head>
@@ -89,6 +102,8 @@
         <div>MINS</div>
         <div>SEGS</div>
     </div>
+
+    <div class="texto-te-quiero">te quiero</div>
 
     <div class="contenedor-botones">
         <a href="tarjetas.html">
