@@ -8,63 +8,65 @@
     
     <style>
         body { 
-            margin: 0; min-height: 100vh; 
+            margin: 0; height: 100vh; 
             display: flex; flex-direction: column; 
-            align-items: center; justify-content: space-between;
+            align-items: center; justify-content: center;
             background: url('FOTO.png') no-repeat center center fixed;
             background-size: cover;
-            padding-bottom: 50px; /* Margen inferior de 50px */
+            overflow: hidden; /* Evita scroll */
         }
 
         .titulo-grande {
-            font-size: 3rem; 
-            margin-top: 30px; /* Margen superior de 30px */
+            position: absolute;
+            top: 30px;
+            font-size: 4rem; 
             text-align: center;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             color: #09a4ec; 
             text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
                          -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 
-                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68, 
-                         7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+                         3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68, 6px 6px #414D68;
         }
 
         .estilo-etiquetas {
-            text-align: center; 
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 45px;
             font-family: 'Comic Sans MS', cursive, sans-serif; 
             font-weight: bold; 
             font-size: 16px; 
             color: #EBD758; 
-            text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, 
-                         -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68;
+            text-shadow: 1px 1px 2px #414D68;
+            margin-top: 100px;
         }
 
         .your-clock { 
-            display: flex; justify-content: center;
-            margin: 20px 0;
+            display: flex; justify-content: center; 
         }
 
-        .clock-labels {
-            display: flex; justify-content: center;
-            width: 100%;
-            gap: 25px;
-        }
+        /* Separación de 20px entre grupos de dígitos */
+        .flip-clock-wrapper ul { margin: 0 10px !important; }
 
         .contenedor-botones {
+            position: absolute;
+            bottom: 100px;
             display: flex;
-            gap: 30px;
-            margin-top: auto;
+            gap: 40px;
         }
 
         .btn-img {
-            width: 100px; cursor: pointer; transition: transform 0.3s;
+            width: 90px; cursor: pointer; transition: transform 0.3s;
         }
+        .btn-img:hover { transform: scale(1.1); }
 
-        /* Adaptación para móviles con separación de 30px */
+        /* Ajustes para móviles */
         @media (max-width: 600px) {
-            .your-clock .flip-clock-wrapper ul { margin: 0 15px !important; } /* Crea la separación de 30px total */
+            .titulo-grande { font-size: 2rem !important; }
             .your-clock { transform: scale(0.7); }
-            .clock-labels { gap: 35px !important; }
+            .estilo-etiquetas { gap: 25px; margin-top: 80px; }
+            .btn-img { width: 70px !important; }
         }
     </style>
 </head>
@@ -74,7 +76,7 @@
 
     <div class="your-clock"></div>
 
-    <div class="clock-labels estilo-etiquetas">
+    <div class="estilo-etiquetas">
         <div>DÍAS</div>
         <div>HRS</div>
         <div>MINS</div>
@@ -82,8 +84,12 @@
     </div>
 
     <div class="contenedor-botones">
-        <a href="tarjetas.html"><img src="corazon.png" class="btn-img" alt="Regalo"></a>
-        <a href="chistes.html"><img src="risa.png" class="btn-img" alt="Chistes"></a>
+        <a href="tarjetas.html">
+            <img src="corazon.png" class="btn-img" alt="Regalo">
+        </a>
+        <a href="chistes.html">
+            <img src="risa.png" class="btn-img" alt="Chistes">
+        </a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
