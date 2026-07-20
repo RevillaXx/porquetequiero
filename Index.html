@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GPSDB9WLGJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPSDB9WLGJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-GPSDB9WLGJ');
+      gtag('config', 'G-GPSDB9WLGJ');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,30 +19,45 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            justify-content: center; /* Centra todo verticalmente */
-            background: url('FOTO.png') no-repeat center center fixed;
-            background-size: cover;
+            justify-content: flex-start; 
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            gap: 25px; /* Espacio uniforme entre TODOS los elementos */
+            gap: 20px; 
             padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            z-index: -100;
+            object-fit: contain; 
+            transform: translate(-50%, -50%);
+            background-color: #0d8ca1; 
         }
 
         .titulo-grande {
             font-size: 3.5rem; 
             color: #09a4ec; 
-            margin: 0;
+            margin-top: 10px; /* POSICIÓN: Arriba del todo */
+            margin-bottom: 0px;
             text-align: center;
             text-shadow: 2px 2px 4px #414D68;
+            z-index: 1;
         }
 
         .contenedor-contador {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             padding: 20px;
             border-radius: 25px;
             text-align: center;
             width: 90%;
             max-width: 450px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1;
         }
 
         .label-contador {
@@ -64,6 +78,9 @@
             gap: 30px;
             justify-content: center;
             align-items: center;
+            z-index: 1;
+            margin-top: auto; /* POSICIÓN: Empuja los botones abajo del todo */
+            margin-bottom: 20px;
         }
 
         .btn-img {
@@ -74,26 +91,28 @@
         .btn-img:hover { transform: scale(1.1); }
 
         @media (max-width: 600px) {
-            .titulo-grande { font-size: 2.2rem; }
+            .titulo-grande { 
+                font-size: 2.2rem; 
+                margin-top: 10px;
+            }
             .contenedor-contador { padding: 15px; }
             .valor-contador { font-size: 1.3rem; }
             .btn-img { width: 70px; }
-            body { gap: 15px; } /* Menos espacio en móviles para que quepa todo */
+            body { gap: 15px; } 
         }
     </style>
 </head>
 <body>
+
+    <video autoplay loop muted playsinline class="video-background">
+        <source src="BeaVic.mp4" type="video/mp4">
+    </video>
 
     <h1 class="titulo-grande">Bea💙💗Victor</h1>
 
     <div class="contenedor-contador">
         <div class="label-contador">💖 Tiempo juntos</div>
         <div id="counter-juntos" class="valor-contador">Cargando...</div>
-    </div>
-
-    <div class="contenedor-contador">
-        <div class="label-contador">⏳ Para nuestro día especial</div>
-        <div id="counter-especial" class="valor-contador">Cargando...</div>
     </div>
 
     <div class="contenedor-botones">
@@ -104,7 +123,6 @@
 
     <script>
         const startDate = new Date("2026-04-05T00:00:00");
-        const specialDate = new Date("2026-07-14T00:00:00");
 
         function actualizar() {
             const now = new Date();
@@ -114,10 +132,6 @@
             document.getElementById("counter-juntos").innerHTML = 
                 `${Math.floor(diffJ / (1000*60*60*24))} días ${Math.floor(diffJ/(1000*60*60)%24)}h ${Math.floor(diffJ/(1000*60)%60)}m ${Math.floor(diffJ/1000%60)}s`;
 
-            // Lógica día especial
-            const diffE = specialDate - now;
-            document.getElementById("counter-especial").innerHTML = 
-                `${Math.floor(diffE / (1000*60*60*24))} días ${Math.floor(diffE/(1000*60*60)%24)}h ${Math.floor(diffE/(1000*60)%60)}m ${Math.floor(diffE/1000%60)}s`;
         }
         setInterval(actualizar, 1000);
         actualizar();
