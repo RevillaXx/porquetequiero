@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nuestras Fotos 💖</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #ffeef2 0%, #ffd6e0 100%); 
+            padding: 20px;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .titulo { 
+            font-size: 1.8rem; 
+            color: #ff4d6d; 
+            margin-bottom: 30px; 
+            text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.1);
+            font-weight: 800;
+            text-align: center;
+        }
+
+        /* Contenedor de la baraja */
+        .baraja-contenedor {
+            position: relative;
+            width: 100%;
+            max-width: 450px; 
+            height: 320px;    
+            perspective: 1000px;
+            margin-bottom: 40px;
+        }
+
+        .carta {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            border: 6px solid white;
+            /* Cambiado a negro/oscuro para que los bordes vacíos de las fotos no desentonen */
+            background: #1a1a1a; 
+            cursor: grab;
+            transform-origin: center center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .carta:active { cursor: grabbing; }
+
+        /* Ajuste definitivo de la imagen */
+        .carta img {
+            width: 100%;
+            height: 100%;
+            /* CONTAIN: Garantiza que la foto entera se vea sin recortes */
+            object-fit: contain; 
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* OPCIONAL: Fondo difuminado estético para rellenar los bordes negros */
+        .carta::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: var(--bg-img);
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px) brightness(0.5);
+            z-index: 1;
+        }
+
+        /* --- Posiciones de la pila --- */
+        .carta.p0 { z-index: 3; transform: translateZ(0px) scale(1); opacity: 1; }
+        .carta.p1 { z-index: 2; transform: translateZ(-20px) translateX(10px) rotate(2deg); opacity: 0.85; }
+        .carta.p2 { z-index: 1; transform: translateZ(-40px) translateX(20px) rotate(-2deg); opacity: 0.6; }
+        .carta.p-resto { z-index: 0; transform: translateZ(-60px) translateX(30px); opacity: 0; pointer-events: none; }
+
+        .con-transicion {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+        }
+
+        .btn-volver {
+            background: transparent;
+            color: #ff4d6d;
+            border: 2px solid #ff4d6d;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-volver:hover {
+            background: #ff4d6d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="titulo">Nuestros Momentos ✨</h1>
+
+    <div class="baraja-contenedor" id="baraja"></div>
+
+    <a href="index.html" class="btn-volver">Volver al inicio</a>
+
+    <script>
+        const contenedor = document.getElementById('baraja');
+        
+        // --- GENERACIÓN DINÁMICA DE FOTOS ---
+        for (let i = 11; i <= 44; i++) {
+            const divCarta = document.createElement('div');
+            divCarta.className = 'carta';
+            // Pasamos la ruta de la imagen como variable CSS para el fondo difuminado
+            divCarta.style.setProperty('--bg-img', `url(${i}.jpg)`);
+            
+            const img = document.createElement('img');
+            img.src = `${i}.jpg`; 
+            img.alt = `Foto ${i}`;
+            
+            divCarta.appendChild(img);
+            contenedor.appendChild(divCarta);
+        }
+
+        let cartas = Array.from(document.querySelectorAll('.carta'));
+        let arrastrando = false;
+        let startX = 0;
+        let currentX = 0;
+        let cartaActual = null;
+
+        function ordenarPila() {
+            cartas.forEach((carta, i) => {
+                carta.className = 'carta'; 
+                if (i === 0) carta.classList.add('p0');
+                else if (i === 1) carta.classList.add('p1');
+                else if (i === 2) carta.classList.add('p2');
+                else carta.classList.add('p-resto');
+            });
+            cartaActual = cartas[0];
+        }
+
+        function empezarArrastre(e) {
+            if (cartas.length <= 1) return;
+            arrastrando = true;
+            cartaActual.classList.remove('con-transicion');
+            startX = e.touches ? e.touches[0].clientX : e.clientX;
+        }
+
+        function moviendoArrastre(e) {
+            if (!arrastrando) return;
+            const x = e.touches ? e.touches[0].clientX : e.clientX;
+            currentX = x - startX;
+            const rotacion = currentX / 15; 
+            cartaActual.style.transform = `translateX(${currentX}px) rotate(${rotacion}deg)`;
+        }
+
+        function determinarArrastre() {
+            if (!arrastrando) return;
+            arrastrando = false;
+            cartaActual.classList.add('con-transicion');
+
+            const umbralDeslizado = window.innerWidth * 0.25;
+
+            if (currentX > umbralDeslizado) {
+                cartaActual.style.transform = `translateX(150%) rotate(20deg)`;
+                cartaActual.style.opacity = '0';
+                ciclarCarta();
+            } else if (currentX < -umbralDeslizado) {
+                cartaActual.style.transform = `translateX(-150%) rotate(-20deg)`;
+                cartaActual.style.opacity = '0';
+                ciclarCarta();
+            } else {
+                cartaActual.style.transform = '';
+            }
+            currentX = 0;
+        }
+
+        function ciclarCarta() {
+            setTimeout(() => {
+                cartaActual.style.transform = ''; 
+                cartaActual.style.opacity = '';
+                const primera = cartas.shift();
+                cartas.push(primera);
+                contenedor.appendChild(primera);
+                ordenarPila();
+            }, 300);
+        }
+
+        contenedor.addEventListener('touchstart', empezarArrastre, {passive: true});
+        window.addEventListener('touchmove', moviendoArrastre);
+        window.addEventListener('touchend', determinarArrastre);
+
+        contenedor.addEventListener('mousedown', empezarArrastre);
+        window.addEventListener('mousemove', moviendoArrastre);
+        window.addEventListener('mouseup', determinarArrastre);
+
+        ordenarPila();
+    </script>
+</body>
+</html>
