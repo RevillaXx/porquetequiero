@@ -42,7 +42,7 @@
         .titulo-grande {
             font-size: 3.5rem; 
             color: #09a4ec; 
-            margin-top: 10px; /* POSICIÓN: Arriba del todo */
+            margin-top: 10px; 
             margin-bottom: 0px;
             text-align: center;
             text-shadow: 2px 2px 4px #414D68;
@@ -79,7 +79,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1;
-            margin-top: auto; /* POSICIÓN: Empuja los botones abajo del todo */
+            margin-top: auto; 
             margin-bottom: 20px;
         }
 
@@ -90,6 +90,27 @@
         }
         .btn-img:hover { transform: scale(1.1); }
 
+        /* NUEVO: Estilos para el botón de sonido flotante */
+        .btn-sonido {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .btn-sonido:active { transform: scale(0.9); }
+
         @media (max-width: 600px) {
             .titulo-grande { 
                 font-size: 2.2rem; 
@@ -99,14 +120,19 @@
             .valor-contador { font-size: 1.3rem; }
             .btn-img { width: 70px; }
             body { gap: 15px; } 
+            .btn-sonido { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <video autoplay loop muted playsinline class="video-background">
+    <!-- Mantenemos el video silenciado por defecto para cumplir con el navegador -->
+    <video autoplay loop muted playsinline id="miVideo" class="video-background">
         <source src="videos/BeaVic.mp4" type="video/mp4">
     </video>
+
+    <!-- NUEVO: Botón flotante para activar el sonido -->
+    <button id="botonSonido" class="btn-sonido">🔇</button>
 
     <h1 class="titulo-grande">Bea💙💗Victor</h1>
 
@@ -126,15 +152,26 @@
 
         function actualizar() {
             const now = new Date();
-            
-            // Lógica tiempo juntos
             const diffJ = now - startDate;
             document.getElementById("counter-juntos").innerHTML = 
                 `${Math.floor(diffJ / (1000*60*60*24))} días ${Math.floor(diffJ/(1000*60*60)%24)}h ${Math.floor(diffJ/(1000*60)%60)}m ${Math.floor(diffJ/1000%60)}s`;
-
         }
         setInterval(actualizar, 1000);
         actualizar();
+
+        // NUEVO: Lógica del botón de sonido
+        const video = document.getElementById("miVideo");
+        const btnSonido = document.getElementById("botonSonido");
+
+        btnSonido.addEventListener("click", () => {
+            if (video.muted) {
+                video.muted = false;
+                btnSonido.innerHTML = "🔊"; // Cambia el emoji a encendido
+            } else {
+                video.muted = true;
+                btnSonido.innerHTML = "🔇"; // Cambia el emoji a silenciado
+            }
+        });
     </script>
 </body>
 </html>
