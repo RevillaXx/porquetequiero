@@ -130,14 +130,14 @@
         const contenedor = document.getElementById('baraja');
         
         // --- GENERACIÓN DINÁMICA DE FOTOS ---
-        for (let i = 11; i <= 44; i++) {
+        for (let i = 11; i <= 45; i++) {
             const divCarta = document.createElement('div');
             divCarta.className = 'carta';
             // Pasamos la ruta de la imagen como variable CSS para el fondo difuminado
             divCarta.style.setProperty('--bg-img', `url(${i}.jpg)`);
             
             const img = document.createElement('img');
-            img.src = `${i}.jpg`; 
+            img.src = `$fotos/{i}.jpg`; 
             img.alt = `Foto ${i}`;
             
             divCarta.appendChild(img);
