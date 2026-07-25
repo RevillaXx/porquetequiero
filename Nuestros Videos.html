@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Videos 🎬</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0f0c20;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Luces de fondo decorativas */
+        .glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 77, 109, 0.35) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glow-1 { top: -50px; left: -50px; }
+        .glow-2 { bottom: -50px; right: -50px; background: radial-gradient(circle, rgba(123, 44, 191, 0.4) 0%, rgba(0,0,0,0) 70%); }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #ff4d6d, #ff85a1, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            color: #a0a0b0;
+            margin-top: 5px;
+        }
+
+        /* Visor principal de video */
+        .video-card-container {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            height: 580px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
+        /* Reproductor HTML5 personalizado */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Capa superior con info del video */
+        .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .video-badge {
+            align-self: flex-start;
+            background: rgba(255, 77, 109, 0.3);
+            border: 1px solid rgba(255, 77, 109, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* Botón gigante de Play al pausar */
+        .play-overlay-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 77, 109, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            box-shadow: 0 0 25px rgba(255, 77, 109, 0.6);
+        }
+
+        .play-overlay-btn.visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .play-overlay-btn::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+        }
+
+        /* Panel de navegación entre videos */
+        .controls-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 380px;
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-nav:hover {
+            background: rgba(255, 77, 109, 0.3);
+            border-color: rgba(255, 77, 109, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-nav:active {
+            transform: translateY(0);
+        }
+
+        .counter {
+            font-size: 0.9rem;
+            color: #8a8a9e;
+            font-weight: 600;
+        }
+
+        .btn-volver {
+            margin-top: 25px;
+            color: #a0a0b0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+            z-index: 1;
+        }
+
+        .btn-volver:hover {
+            color: #ff4d6d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="header">
+        <h1>Nuestros Recuerdos 🎥</h1>
+        <p>Toca el video para pausar o reproducir</p>
+    </div>
+
+    <!-- Tarjeta del Video -->
+    <div class="video-card-container">
+        <div class="video-wrapper">
+            <video id="reproductor" playsinline loop preload="metadata">
+                <source id="video-src" src="" type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+            </video>
+            
+            <div class="play-overlay-btn" id="play-icon"></div>
+
+            <div class="video-overlay">
+                <span class="video-badge" id="video-tag">Video 1</span>
+                <h2 class="video-title" id="video-title">Momento Especial</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controles de Navegación -->
+    <div class="controls-bar">
+        <button class="btn-nav" id="btn-prev">← Anter.</button>
+        <span class="counter" id="contador">1 / 5</span>
+        <button class="btn-nav" id="btn-next">Siguiente →</button>
+    </div>
+
+    <a href="index.html" class="btn-volver">← Volver al menú principal</a>
+
+    <script>
+        // ========================================================
+        // CONFIGURA AQUÍ TUS VIDEOS Y NOMBRES
+        // ========================================================
+        // Guarda tus videos en una carpeta (ej: "videos/") 
+        // o directamente en la raíz y cambia la propiedad 'archivo'
+        
+        const listaVideos = [
+            {
+                archivo: "videos/1.mp4",
+                titulo: "Nuestro primer viaje 🚗",
+                etiqueta: "Recuerdo Especial"
+            },
+            {
+                archivo: "videos/2.mp4",
+                titulo: "Te Amo💙💗",
+                etiqueta: "LOVE"
+            },
+            {
+                archivo: "videos/3.mp4",
+                titulo: "jajajajaja 😂",
+                etiqueta: "Risas"
+            },
+             {
+                archivo: "videos/4.mp4",
+                titulo: "Juntos es otra Historia🥰",
+                etiqueta: "Gracias"
+            }
+            // Agrega más videos copiando el bloque anterior
+        ];
+
+        // Elementos del DOM
+        const reproductor = document.getElementById('reproductor');
+        const videoSrc = document.getElementById('video-src');
+        const videoTitle = document.getElementById('video-title');
+        const videoTag = document.getElementById('video-tag');
+        const contador = document.getElementById('contador');
+        const playIcon = document.getElementById('play-icon');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+
+        let indiceActual = 0;
+
+        function cargarVideo(indice) {
+            const video = listaVideos[indice];
+            
+            // Actualizar elementos
+            reproductor.pause();
+            videoSrc.src = video.archivo;
+            reproductor.load();
+            
+            videoTitle.textContent = video.titulo;
+            videoTag.textContent = video.etiqueta;
+            contador.textContent = `${indice + 1} / ${listaVideos.length}`;
+
+            // Intentar autoreproducir
+            reproductor.play().then(() => {
+                playIcon.classList.remove('visible');
+            }).catch(() => {
+                // Si el navegador bloquea el autoplay con sonido
+                playIcon.classList.add('visible');
+            });
+        }
+
+        // Play / Pause al hacer clic en el video
+        reproductor.addEventListener('click', () => {
+            if (reproductor.paused) {
+                reproductor.play();
+                playIcon.classList.remove('visible');
+            } else {
+                reproductor.pause();
+                playIcon.classList.add('visible');
+            }
+        });
+
+        // Controles Anterior / Siguiente
+        btnNext.addEventListener('click', () => {
+            indiceActual = (indiceActual + 1) % listaVideos.length;
+            cargarVideo(indiceActual);
+        });
+
+        btnPrev.addEventListener('click', () => {
+            indiceActual = (indiceActual - 1 + listaVideos.length) % listaVideos.length;
+            cargarVideo(indiceActual);
+        });
+
+        // Inicializar con el primer video
+        cargarVideo(0);
+    </script>
+</body>
+</html>
